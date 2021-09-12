@@ -18,5 +18,12 @@ variable "db_password" {
 }
 
 variable "yc_file" {
+  type = string
   description = "Filename for Yandex service account key"
 }
+
+variable "yc_host_number" {
+  description = "Used hosts number"
+  type = number
+}
+
