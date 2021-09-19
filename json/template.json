@@ -1,20 +1,20 @@
 {
   "variables": {
-    "token": "{{env `YC_TOKEN`}}",
-    "folder_id": "{{env `YC_FOLDER`}}"
+    "service_account_key_file": "/home/viktor/otus-devops/secret_keys/key_packer.json",
+    "folder_id": "b1gh7vf302rj4uqpicvd"
   },
 
   "builders": [
     {
       "type": "yandex",
-      "token": "{{user `token`}}",
+      "service_account_key_file": "/home/viktor/otus-devops/secret_keys/key_packer.json",
 
-      "folder_id": "{{user `folder_id`}}",
+      "folder_id": "b1gh7vf302rj4uqpicvd",
       "platform_id": "standard-v2",
 
-      "image_name": "ubuntu-2004-lts-nginx-{{isotime | clean_resource_name}}",
+      "image_name": "ubuntu-2004-lts-nginx-isotime",
       "image_family": "ubuntu-web-server",
-      "image_description": "my custom ubuntu with nginx",
+      "image_description": "test custom ubuntu with nginx",
 
       "source_image_family": "ubuntu-2004-lts",
 

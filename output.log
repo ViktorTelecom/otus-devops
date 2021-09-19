@@ -1,0 +1,474 @@
+viktor@ubuntu:~/otus-devops/packer$ packer build json/template.json 
+yandex: output will be in this color.
+
+==> yandex: Creating temporary ssh key for instance...
+==> yandex: Error getting source image for instance creation: client-request-id = 29d8882c-352d-4cc4-8748-b172275c025c client-trace-id = 6520ac65-e9b9-4cbf-8e65-3b872ef06cbc rpc error: code = Unauthenticated desc = iam token create failed: failed to get compute instance service account token from instance metadata service: GET http://169.254.169.254/computeMetadata/v1/instance/service-accounts/default/token: Get "http://169.254.169.254/computeMetadata/v1/instance/service-accounts/default/token": dial tcp 169.254.169.254:80: i/o timeout.
+==> yandex: Are you inside compute instance?
+Build 'yandex' errored after 1 second 581 milliseconds: Error getting source image for instance creation: client-request-id = 29d8882c-352d-4cc4-8748-b172275c025c client-trace-id = 6520ac65-e9b9-4cbf-8e65-3b872ef06cbc rpc error: code = Unauthenticated desc = iam token create failed: failed to get compute instance service account token from instance metadata service: GET http://169.254.169.254/computeMetadata/v1/instance/service-accounts/default/token: Get "http://169.254.169.254/computeMetadata/v1/instance/service-accounts/default/token": dial tcp 169.254.169.254:80: i/o timeout.
+Are you inside compute instance?
+
+==> Wait completed after 1 second 581 milliseconds
+
+==> Some builds didn't complete successfully and had errors:
+--> yandex: Error getting source image for instance creation: client-request-id = 29d8882c-352d-4cc4-8748-b172275c025c client-trace-id = 6520ac65-e9b9-4cbf-8e65-3b872ef06cbc rpc error: code = Unauthenticated desc = iam token create failed: failed to get compute instance service account token from instance metadata service: GET http://169.254.169.254/computeMetadata/v1/instance/service-accounts/default/token: Get "http://169.254.169.254/computeMetadata/v1/instance/service-accounts/default/token": dial tcp 169.254.169.254:80: i/o timeout.
+Are you inside compute instance?
+
+==> Builds finished but no artifacts were created.
+viktor@ubuntu:~/otus-devops/packer$ 
+viktor@ubuntu:~/otus-devops/packer$ cd /
+viktor@ubuntu:/$  ip route show 
+default via 192.168.161.2 dev ens33 proto dhcp metric 100 
+169.254.0.0/16 dev ens33 scope link metric 1000 
+192.168.161.0/24 dev ens33 proto kernel scope link src 192.168.161.128 metric 100 
+viktor@ubuntu:/$ 
+viktor@ubuntu:/$ ip address
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: ens33: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 00:0c:29:38:ae:0b brd ff:ff:ff:ff:ff:ff
+    altname enp2s1
+    inet 192.168.161.128/24 brd 192.168.161.255 scope global dynamic noprefixroute ens33
+       valid_lft 1179sec preferred_lft 1179sec
+    inet6 fe80::cd4b:b6dd:bb36:78e8/64 scope link noprefixroute 
+       valid_lft forever preferred_lft forever
+viktor@ubuntu:/$ 
+viktor@ubuntu:/$ 
+viktor@ubuntu:/$ 
+viktor@ubuntu:/$ 
+viktor@ubuntu:/$ 
+viktor@ubuntu:/$ cd /home/
+viktor@ubuntu:/home$ ls
+viktor
+viktor@ubuntu:/home$ cd viktor/
+viktor@ubuntu:~$ ls
+Desktop  Documents  Downloads  Music  otus-devops  Pictures  Public  snap  Templates  Videos  yandex-cloud
+viktor@ubuntu:~$ cd yandex-cloud/
+viktor@ubuntu:~/yandex-cloud$ ls
+bin  completion.bash.inc  completion.zsh.inc  path.bash.inc
+viktor@ubuntu:~/yandex-cloud$ cd ..
+viktor@ubuntu:~$ cd otus-devops/
+viktor@ubuntu:~/otus-devops$ ls
+packer  secret_keys  terraform
+viktor@ubuntu:~/otus-devops$ nano json/template.json 
+viktor@ubuntu:~/otus-devops$ 
+viktor@ubuntu:~/otus-devops$ cd packer/
+viktor@ubuntu:~/otus-devops/packer$ nano json/template.json 
+viktor@ubuntu:~/otus-devops/packer$ 
+viktor@ubuntu:~/otus-devops/packer$ 
+viktor@ubuntu:~/otus-devops/packer$ 
+viktor@ubuntu:~/otus-devops/packer$ 
+viktor@ubuntu:~/otus-devops/packer$ yc config set service-account-key -h
+Set value for the specified configuration property
+
+Usage:
+  yc config set <PROPERTY> <VALUE> [Global Flags...]
+
+Examples:
+  yc config set folder-name YOUR_FOLDER_NAME
+  yc config set format json
+  yc config set service-account-key ./path/to/key/file.json
+  yc config set instance-service-account true
+
+  See 'yc config --help' for all available configuration properties.
+
+Global Flags:
+      --profile string 
+              Set the custom configuration file. 
+
+      --debug 
+              Debug logging. 
+
+      --debug-grpc 
+              Debug gRPC logging. Very verbose, used for debugging connection problems. 
+
+      --no-user-output 
+              Disable printing user intended output to stderr. 
+
+      --retry int 
+              Enable gRPC retries. By default, retries are enabled with maximum 5 attempts. 
+
+              Pass 0 to disable retries. Pass any negative value for infinite retries. 
+
+              Even infinite retries are capped with 2 minutes timeout. 
+
+      --cloud-id string 
+              Set the ID of the cloud to use. 
+
+      --folder-id string 
+              Set the ID of the folder to use. 
+
+      --folder-name string 
+              Set the name of the folder to use (will be resolved to id). 
+
+      --token string 
+              Set the OAuth token to use. 
+
+      --format string 
+              Set the output format: text (default), yaml, json, json-rest. 
+
+  -h, --help 
+              Display help for the command.
+
+viktor@ubuntu:~/otus-devops/packer$ yc config set service-account-key /home/viktor/otus-devops/secret_keys/key_packer.json
+viktor@ubuntu:~/otus-devops/packer$ yc iam create-token
+t1.9euelZqVjJCJz5PNi8_IiYqOj82Ty-3rnpWajJqPlJDOzM2YzpDKj4mRyIzl9Pc3IWN1-e8zFGLO3fT3d09gdfnvMxRizs3n9euelZqKzMqdyM3Jzs-SlMnJxs6Tlu_9.p55zZZ_ikzGsM_f31jhJbZebVeCUVU8SuYwNvzVedlOYv9Cgp7R50-TTymUoJPj7O0wASyECF7SHzgLoOFMyCg
+viktor@ubuntu:~/otus-devops/packer$ 
+viktor@ubuntu:~/otus-devops/packer$ 
+viktor@ubuntu:~/otus-devops/packer$ 
+viktor@ubuntu:~/otus-devops/packer$ packer build json/template.json 
+yandex: output will be in this color.
+
+==> yandex: Creating temporary ssh key for instance...
+==> yandex: Error getting source image for instance creation: client-request-id = 8cfc7b28-0e35-4679-98e8-f449228c1b24 client-trace-id = d329cea9-d068-4543-8708-9ac5c4279e9d rpc error: code = Unauthenticated desc = iam token create failed: failed to get compute instance service account token from instance metadata service: GET http://169.254.169.254/computeMetadata/v1/instance/service-accounts/default/token: Get "http://169.254.169.254/computeMetadata/v1/instance/service-accounts/default/token": dial tcp 169.254.169.254:80: i/o timeout.
+==> yandex: Are you inside compute instance?
+Build 'yandex' errored after 2 seconds 357 milliseconds: Error getting source image for instance creation: client-request-id = 8cfc7b28-0e35-4679-98e8-f449228c1b24 client-trace-id = d329cea9-d068-4543-8708-9ac5c4279e9d rpc error: code = Unauthenticated desc = iam token create failed: failed to get compute instance service account token from instance metadata service: GET http://169.254.169.254/computeMetadata/v1/instance/service-accounts/default/token: Get "http://169.254.169.254/computeMetadata/v1/instance/service-accounts/default/token": dial tcp 169.254.169.254:80: i/o timeout.
+Are you inside compute instance?
+
+==> Wait completed after 2 seconds 357 milliseconds
+
+==> Some builds didn't complete successfully and had errors:
+--> yandex: Error getting source image for instance creation: client-request-id = 8cfc7b28-0e35-4679-98e8-f449228c1b24 client-trace-id = d329cea9-d068-4543-8708-9ac5c4279e9d rpc error: code = Unauthenticated desc = iam token create failed: failed to get compute instance service account token from instance metadata service: GET http://169.254.169.254/computeMetadata/v1/instance/service-accounts/default/token: Get "http://169.254.169.254/computeMetadata/v1/instance/service-accounts/default/token": dial tcp 169.254.169.254:80: i/o timeout.
+Are you inside compute instance?
+
+==> Builds finished but no artifacts were created.
+viktor@ubuntu:~/otus-devops/packer$ nano json/template.json 
+viktor@ubuntu:~/otus-devops/packer$ packer build json/template.json 
+yandex: output will be in this color.
+
+==> yandex: Creating temporary ssh key for instance...
+==> yandex: Error getting source image for instance creation: client-request-id = 241c8e9a-eeda-4026-a83b-081d7cc8b943 client-trace-id = 8d2c6c1a-5644-4b4b-9a73-323bbbbfc1fa rpc error: code = Unauthenticated desc = iam token create failed: failed to get compute instance service account token from instance metadata service: GET http://169.254.169.254/computeMetadata/v1/instance/service-accounts/default/token: Get "http://169.254.169.254/computeMetadata/v1/instance/service-accounts/default/token": dial tcp 169.254.169.254:80: i/o timeout.
+==> yandex: Are you inside compute instance?
+Build 'yandex' errored after 1 second 573 milliseconds: Error getting source image for instance creation: client-request-id = 241c8e9a-eeda-4026-a83b-081d7cc8b943 client-trace-id = 8d2c6c1a-5644-4b4b-9a73-323bbbbfc1fa rpc error: code = Unauthenticated desc = iam token create failed: failed to get compute instance service account token from instance metadata service: GET http://169.254.169.254/computeMetadata/v1/instance/service-accounts/default/token: Get "http://169.254.169.254/computeMetadata/v1/instance/service-accounts/default/token": dial tcp 169.254.169.254:80: i/o timeout.
+Are you inside compute instance?
+
+==> Wait completed after 1 second 573 milliseconds
+
+==> Some builds didn't complete successfully and had errors:
+--> yandex: Error getting source image for instance creation: client-request-id = 241c8e9a-eeda-4026-a83b-081d7cc8b943 client-trace-id = 8d2c6c1a-5644-4b4b-9a73-323bbbbfc1fa rpc error: code = Unauthenticated desc = iam token create failed: failed to get compute instance service account token from instance metadata service: GET http://169.254.169.254/computeMetadata/v1/instance/service-accounts/default/token: Get "http://169.254.169.254/computeMetadata/v1/instance/service-accounts/default/token": dial tcp 169.254.169.254:80: i/o timeout.
+Are you inside compute instance?
+
+==> Builds finished but no artifacts were created.
+viktor@ubuntu:~/otus-devops/packer$ nano json/template.json 
+viktor@ubuntu:~/otus-devops/packer$ packer build json/template.json 
+Error: Failed to prepare build: "yandex"
+
+1 error occurred:
+	* unknown configuration key: '"service_key_file"'
+
+
+
+
+
+==> Wait completed after 2 microseconds
+
+==> Builds finished but no artifacts were created.
+viktor@ubuntu:~/otus-devops/packer$ nano json/template.json 
+viktor@ubuntu:~/otus-devops/packer$ packer build json/template.json 
+yandex: output will be in this color.
+
+==> yandex: Creating temporary ssh key for instance...
+==> yandex: Error getting source image for instance creation: client-request-id = 5ba232a1-4bc6-4752-b536-7734315e0e7f client-trace-id = 7773f5c6-ce4a-496f-b872-141a5e60a6a7 rpc error: code = Unauthenticated desc = iam token create failed: failed to get compute instance service account token from instance metadata service: GET http://169.254.169.254/computeMetadata/v1/instance/service-accounts/default/token: Get "http://169.254.169.254/computeMetadata/v1/instance/service-accounts/default/token": dial tcp 169.254.169.254:80: i/o timeout.
+==> yandex: Are you inside compute instance?
+Build 'yandex' errored after 1 second 592 milliseconds: Error getting source image for instance creation: client-request-id = 5ba232a1-4bc6-4752-b536-7734315e0e7f client-trace-id = 7773f5c6-ce4a-496f-b872-141a5e60a6a7 rpc error: code = Unauthenticated desc = iam token create failed: failed to get compute instance service account token from instance metadata service: GET http://169.254.169.254/computeMetadata/v1/instance/service-accounts/default/token: Get "http://169.254.169.254/computeMetadata/v1/instance/service-accounts/default/token": dial tcp 169.254.169.254:80: i/o timeout.
+Are you inside compute instance?
+
+==> Wait completed after 1 second 592 milliseconds
+
+==> Some builds didn't complete successfully and had errors:
+--> yandex: Error getting source image for instance creation: client-request-id = 5ba232a1-4bc6-4752-b536-7734315e0e7f client-trace-id = 7773f5c6-ce4a-496f-b872-141a5e60a6a7 rpc error: code = Unauthenticated desc = iam token create failed: failed to get compute instance service account token from instance metadata service: GET http://169.254.169.254/computeMetadata/v1/instance/service-accounts/default/token: Get "http://169.254.169.254/computeMetadata/v1/instance/service-accounts/default/token": dial tcp 169.254.169.254:80: i/o timeout.
+Are you inside compute instance?
+
+==> Builds finished but no artifacts were created.
+viktor@ubuntu:~/otus-devops/packer$ 
+viktor@ubuntu:~/otus-devops/packer$ 
+viktor@ubuntu:~/otus-devops/packer$ 
+viktor@ubuntu:~/otus-devops/packer$ nano json/template.json 
+viktor@ubuntu:~/otus-devops/packer$ 
+viktor@ubuntu:~/otus-devops/packer$ nano json/template.json 
+viktor@ubuntu:~/otus-devops/packer$ packer build json/template.json 
+yandex: output will be in this color.
+
+==> yandex: Creating temporary ssh key for instance...
+==> yandex: Using as source image: fd81hgrcv6lsnkremf32 (name: "ubuntu-20-04-lts-v20210908", family: "ubuntu-2004-lts")
+==> yandex: Creating network...
+==> yandex: Creating subnet in zone "ru-central1-a"...
+==> yandex: Creating disk...
+==> yandex: Creating instance...
+==> yandex: Waiting for instance with id fhmtbj725csdsitlgp4q to become active...
+    yandex: Detected instance IP: 178.154.255.173
+==> yandex: Using SSH communicator to connect: 178.154.255.173
+==> yandex: Waiting for SSH to become available...
+==> yandex: Connected to SSH!
+==> yandex: Provisioning with shell script: /tmp/packer-shell1037194582
+    yandex: updating apt cache
+==> yandex:
+==> yandex: WARNING: apt does not have a stable CLI interface. Use with caution in scripts.
+==> yandex:
+    yandex: Hit:1 http://mirror.yandex.ru/ubuntu focal InRelease
+    yandex: Get:2 http://mirror.yandex.ru/ubuntu focal-updates InRelease [114 kB]
+    yandex: Get:3 http://mirror.yandex.ru/ubuntu focal-backports InRelease [101 kB]
+    yandex: Get:4 http://security.ubuntu.com/ubuntu focal-security InRelease [114 kB]
+    yandex: Get:5 http://mirror.yandex.ru/ubuntu focal-updates/main amd64 Packages [1,214 kB]
+    yandex: Get:6 http://mirror.yandex.ru/ubuntu focal-updates/main i386 Packages [536 kB]
+    yandex: Get:7 http://mirror.yandex.ru/ubuntu focal-updates/main Translation-en [259 kB]
+    yandex: Get:8 http://mirror.yandex.ru/ubuntu focal-updates/main amd64 c-n-f Metadata [14.3 kB]
+    yandex: Get:9 http://mirror.yandex.ru/ubuntu focal-updates/restricted amd64 Packages [443 kB]
+    yandex: Get:10 http://mirror.yandex.ru/ubuntu focal-updates/restricted i386 Packages [19.3 kB]
+    yandex: Get:11 http://mirror.yandex.ru/ubuntu focal-updates/restricted Translation-en [63.5 kB]
+    yandex: Get:12 http://mirror.yandex.ru/ubuntu focal-updates/restricted amd64 c-n-f Metadata [504 B]
+    yandex: Get:13 http://mirror.yandex.ru/ubuntu focal-updates/universe amd64 Packages [855 kB]
+    yandex: Get:14 http://mirror.yandex.ru/ubuntu focal-updates/universe i386 Packages [633 kB]
+    yandex: Get:15 http://mirror.yandex.ru/ubuntu focal-updates/universe Translation-en [182 kB]
+    yandex: Get:16 http://mirror.yandex.ru/ubuntu focal-updates/universe amd64 c-n-f Metadata [18.9 kB]
+    yandex: Get:17 http://mirror.yandex.ru/ubuntu focal-backports/universe i386 Packages [4,736 B]
+    yandex: Get:18 http://mirror.yandex.ru/ubuntu focal-backports/universe amd64 Packages [5,800 B]
+    yandex: Get:19 http://mirror.yandex.ru/ubuntu focal-backports/universe amd64 c-n-f Metadata [276 B]
+    yandex: Get:20 http://security.ubuntu.com/ubuntu focal-security/main i386 Packages [282 kB]
+    yandex: Get:21 http://security.ubuntu.com/ubuntu focal-security/main amd64 Packages [867 kB]
+    yandex: Get:22 http://security.ubuntu.com/ubuntu focal-security/main Translation-en [167 kB]
+    yandex: Get:23 http://security.ubuntu.com/ubuntu focal-security/main amd64 c-n-f Metadata [8,712 B]
+    yandex: Get:24 http://security.ubuntu.com/ubuntu focal-security/restricted i386 Packages [18.0 kB]
+    yandex: Get:25 http://security.ubuntu.com/ubuntu focal-security/restricted amd64 Packages [406 kB]
+    yandex: Get:26 http://security.ubuntu.com/ubuntu focal-security/restricted Translation-en [58.3 kB]
+    yandex: Get:27 http://security.ubuntu.com/ubuntu focal-security/restricted amd64 c-n-f Metadata [508 B]
+    yandex: Get:28 http://security.ubuntu.com/ubuntu focal-security/universe i386 Packages [507 kB]
+    yandex: Get:29 http://security.ubuntu.com/ubuntu focal-security/universe amd64 Packages [639 kB]
+    yandex: Get:30 http://security.ubuntu.com/ubuntu focal-security/universe Translation-en [102 kB]
+    yandex: Get:31 http://security.ubuntu.com/ubuntu focal-security/universe amd64 c-n-f Metadata [12.4 kB]
+    yandex: Fetched 7,647 kB in 3s (2,186 kB/s)
+    yandex: Reading package lists...
+    yandex: Building dependency tree...
+    yandex: Reading state information...
+    yandex: 18 packages can be upgraded. Run 'apt list --upgradable' to see them.
+==> yandex:
+==> yandex: WARNING: apt does not have a stable CLI interface. Use with caution in scripts.
+==> yandex:
+    yandex: Reading package lists...
+    yandex: Building dependency tree...
+    yandex: Reading state information...
+    yandex: nano is already the newest version (4.8-1ubuntu1).
+    yandex: The following additional packages will be installed:
+    yandex:   fontconfig-config fonts-dejavu-core git-man libcurl3-gnutls liberror-perl
+    yandex:   libfontconfig1 libgd3 libgdbm-compat4 libjbig0 libjpeg-turbo8 libjpeg8
+    yandex:   libnginx-mod-http-image-filter libnginx-mod-http-xslt-filter
+    yandex:   libnginx-mod-mail libnginx-mod-stream libperl5.30 libtiff5 libwebp6 libxpm4
+    yandex:   libxslt1.1 nginx-common nginx-core patch perl perl-modules-5.30
+    yandex: Suggested packages:
+    yandex:   git-daemon-run | git-daemon-sysvinit git-doc git-el git-email git-gui gitk
+    yandex:   gitweb git-cvs git-mediawiki git-svn libgd-tools fcgiwrap nginx-doc ssl-cert
+    yandex:   diffutils-doc perl-doc libterm-readline-gnu-perl
+    yandex:   | libterm-readline-perl-perl make libb-debug-perl liblocale-codes-perl
+    yandex: The following NEW packages will be installed:
+    yandex:   fontconfig-config fonts-dejavu-core git git-man libcurl3-gnutls
+    yandex:   liberror-perl libfontconfig1 libgd3 libgdbm-compat4 libjbig0 libjpeg-turbo8
+    yandex:   libjpeg8 libnginx-mod-http-image-filter libnginx-mod-http-xslt-filter
+    yandex:   libnginx-mod-mail libnginx-mod-stream libperl5.30 libtiff5 libwebp6 libxpm4
+    yandex:   libxslt1.1 nginx nginx-common nginx-core patch perl perl-modules-5.30
+    yandex: 0 upgraded, 27 newly installed, 0 to remove and 18 not upgraded.
+    yandex: Need to get 15.3 MB of archives.
+    yandex: After this operation, 93.9 MB of additional disk space will be used.
+    yandex: Get:1 http://mirror.yandex.ru/ubuntu focal-updates/main amd64 perl-modules-5.30 all 5.30.0-9ubuntu0.2 [2,738 kB]
+    yandex: Get:2 http://mirror.yandex.ru/ubuntu focal/main amd64 libgdbm-compat4 amd64 1.18.1-5 [6,244 B]
+    yandex: Get:3 http://mirror.yandex.ru/ubuntu focal-updates/main amd64 libperl5.30 amd64 5.30.0-9ubuntu0.2 [3,952 kB]
+    yandex: Get:4 http://mirror.yandex.ru/ubuntu focal-updates/main amd64 perl amd64 5.30.0-9ubuntu0.2 [224 kB]
+    yandex: Get:5 http://mirror.yandex.ru/ubuntu focal/main amd64 fonts-dejavu-core all 2.37-1 [1,041 kB]
+    yandex: Get:6 http://mirror.yandex.ru/ubuntu focal/main amd64 fontconfig-config all 2.13.1-2ubuntu3 [28.8 kB]
+    yandex: Get:7 http://mirror.yandex.ru/ubuntu focal-updates/main amd64 libcurl3-gnutls amd64 7.68.0-1ubuntu2.7 [232 kB]
+    yandex: Get:8 http://mirror.yandex.ru/ubuntu focal/main amd64 liberror-perl all 0.17029-1 [26.5 kB]
+    yandex: Get:9 http://mirror.yandex.ru/ubuntu focal-updates/main amd64 git-man all 1:2.25.1-1ubuntu3.2 [884 kB]
+    yandex: Get:10 http://mirror.yandex.ru/ubuntu focal-updates/main amd64 git amd64 1:2.25.1-1ubuntu3.2 [4,554 kB]
+    yandex: Get:11 http://mirror.yandex.ru/ubuntu focal/main amd64 libfontconfig1 amd64 2.13.1-2ubuntu3 [114 kB]
+    yandex: Get:12 http://mirror.yandex.ru/ubuntu focal-updates/main amd64 libjpeg-turbo8 amd64 2.0.3-0ubuntu1.20.04.1 [117 kB]
+    yandex: Get:13 http://mirror.yandex.ru/ubuntu focal/main amd64 libjpeg8 amd64 8c-2ubuntu8 [2,194 B]
+    yandex: Get:14 http://mirror.yandex.ru/ubuntu focal/main amd64 libjbig0 amd64 2.1-3.1build1 [26.7 kB]
+    yandex: Get:15 http://mirror.yandex.ru/ubuntu focal-updates/main amd64 libwebp6 amd64 0.6.1-2ubuntu0.20.04.1 [185 kB]
+    yandex: Get:16 http://mirror.yandex.ru/ubuntu focal-updates/main amd64 libtiff5 amd64 4.1.0+git191117-2ubuntu0.20.04.1 [162 kB]
+    yandex: Get:17 http://mirror.yandex.ru/ubuntu focal/main amd64 libxpm4 amd64 1:3.5.12-1 [34.0 kB]
+    yandex: Get:18 http://mirror.yandex.ru/ubuntu focal-updates/main amd64 libgd3 amd64 2.2.5-5.2ubuntu2.1 [118 kB]
+    yandex: Get:19 http://mirror.yandex.ru/ubuntu focal-updates/main amd64 nginx-common all 1.18.0-0ubuntu1.2 [37.5 kB]
+    yandex: Get:20 http://mirror.yandex.ru/ubuntu focal-updates/main amd64 libnginx-mod-http-image-filter amd64 1.18.0-0ubuntu1.2 [14.4 kB]
+    yandex: Get:21 http://mirror.yandex.ru/ubuntu focal/main amd64 libxslt1.1 amd64 1.1.34-4 [152 kB]
+    yandex: Get:22 http://mirror.yandex.ru/ubuntu focal-updates/main amd64 libnginx-mod-http-xslt-filter amd64 1.18.0-0ubuntu1.2 [12.7 kB]
+    yandex: Get:23 http://mirror.yandex.ru/ubuntu focal-updates/main amd64 libnginx-mod-mail amd64 1.18.0-0ubuntu1.2 [42.5 kB]
+    yandex: Get:24 http://mirror.yandex.ru/ubuntu focal-updates/main amd64 libnginx-mod-stream amd64 1.18.0-0ubuntu1.2 [67.3 kB]
+    yandex: Get:25 http://mirror.yandex.ru/ubuntu focal-updates/main amd64 nginx-core amd64 1.18.0-0ubuntu1.2 [425 kB]
+    yandex: Get:26 http://mirror.yandex.ru/ubuntu focal-updates/main amd64 nginx all 1.18.0-0ubuntu1.2 [3,620 B]
+    yandex: Get:27 http://mirror.yandex.ru/ubuntu focal/main amd64 patch amd64 2.7.6-6 [105 kB]
+==> yandex: debconf: unable to initialize frontend: Dialog
+==> yandex: debconf: (Dialog frontend will not work on a dumb terminal, an emacs shell buffer, or without a controlling terminal.)
+==> yandex: debconf: falling back to frontend: Readline
+==> yandex: debconf: unable to initialize frontend: Readline
+==> yandex: debconf: (Can't locate Term/ReadLine.pm in @INC (you may need to install the Term::ReadLine module) (@INC contains: /etc/perl /usr/local/lib/x86_64-linux-gnu/perl/5.30.0 /usr/local/share/perl/5.30.0 /usr/lib/x86_64-linux-gnu/perl5/5.30 /usr/share/perl5 /usr/lib/x86_64-linux-gnu/perl/5.30 /usr/share/perl/5.30 /usr/local/lib/site_perl /usr/lib/x86_64-linux-gnu/perl-base) at /usr/share/perl5/Debconf/FrontEnd/Readline.pm line 7, <> line 27.)
+==> yandex: debconf: falling back to frontend: Teletype
+==> yandex: dpkg-preconfigure: unable to re-open stdin:
+    yandex: Fetched 15.3 MB in 1s (15.2 MB/s)
+    yandex: Selecting previously unselected package perl-modules-5.30.
+    yandex: (Reading database ... 65530 files and directories currently installed.)
+    yandex: Preparing to unpack .../00-perl-modules-5.30_5.30.0-9ubuntu0.2_all.deb ...
+    yandex: Unpacking perl-modules-5.30 (5.30.0-9ubuntu0.2) ...
+    yandex: Selecting previously unselected package libgdbm-compat4:amd64.
+    yandex: Preparing to unpack .../01-libgdbm-compat4_1.18.1-5_amd64.deb ...
+    yandex: Unpacking libgdbm-compat4:amd64 (1.18.1-5) ...
+    yandex: Selecting previously unselected package libperl5.30:amd64.
+    yandex: Preparing to unpack .../02-libperl5.30_5.30.0-9ubuntu0.2_amd64.deb ...
+    yandex: Unpacking libperl5.30:amd64 (5.30.0-9ubuntu0.2) ...
+    yandex: Selecting previously unselected package perl.
+    yandex: Preparing to unpack .../03-perl_5.30.0-9ubuntu0.2_amd64.deb ...
+    yandex: Unpacking perl (5.30.0-9ubuntu0.2) ...
+    yandex: Selecting previously unselected package fonts-dejavu-core.
+    yandex: Preparing to unpack .../04-fonts-dejavu-core_2.37-1_all.deb ...
+    yandex: Unpacking fonts-dejavu-core (2.37-1) ...
+    yandex: Selecting previously unselected package fontconfig-config.
+    yandex: Preparing to unpack .../05-fontconfig-config_2.13.1-2ubuntu3_all.deb ...
+    yandex: Unpacking fontconfig-config (2.13.1-2ubuntu3) ...
+    yandex: Selecting previously unselected package libcurl3-gnutls:amd64.
+    yandex: Preparing to unpack .../06-libcurl3-gnutls_7.68.0-1ubuntu2.7_amd64.deb ...
+    yandex: Unpacking libcurl3-gnutls:amd64 (7.68.0-1ubuntu2.7) ...
+    yandex: Selecting previously unselected package liberror-perl.
+    yandex: Preparing to unpack .../07-liberror-perl_0.17029-1_all.deb ...
+    yandex: Unpacking liberror-perl (0.17029-1) ...
+    yandex: Selecting previously unselected package git-man.
+    yandex: Preparing to unpack .../08-git-man_1%3a2.25.1-1ubuntu3.2_all.deb ...
+    yandex: Unpacking git-man (1:2.25.1-1ubuntu3.2) ...
+    yandex: Selecting previously unselected package git.
+    yandex: Preparing to unpack .../09-git_1%3a2.25.1-1ubuntu3.2_amd64.deb ...
+    yandex: Unpacking git (1:2.25.1-1ubuntu3.2) ...
+    yandex: Selecting previously unselected package libfontconfig1:amd64.
+    yandex: Preparing to unpack .../10-libfontconfig1_2.13.1-2ubuntu3_amd64.deb ...
+    yandex: Unpacking libfontconfig1:amd64 (2.13.1-2ubuntu3) ...
+    yandex: Selecting previously unselected package libjpeg-turbo8:amd64.
+    yandex: Preparing to unpack .../11-libjpeg-turbo8_2.0.3-0ubuntu1.20.04.1_amd64.deb ...
+    yandex: Unpacking libjpeg-turbo8:amd64 (2.0.3-0ubuntu1.20.04.1) ...
+    yandex: Selecting previously unselected package libjpeg8:amd64.
+    yandex: Preparing to unpack .../12-libjpeg8_8c-2ubuntu8_amd64.deb ...
+    yandex: Unpacking libjpeg8:amd64 (8c-2ubuntu8) ...
+    yandex: Selecting previously unselected package libjbig0:amd64.
+    yandex: Preparing to unpack .../13-libjbig0_2.1-3.1build1_amd64.deb ...
+    yandex: Unpacking libjbig0:amd64 (2.1-3.1build1) ...
+    yandex: Selecting previously unselected package libwebp6:amd64.
+    yandex: Preparing to unpack .../14-libwebp6_0.6.1-2ubuntu0.20.04.1_amd64.deb ...
+    yandex: Unpacking libwebp6:amd64 (0.6.1-2ubuntu0.20.04.1) ...
+    yandex: Selecting previously unselected package libtiff5:amd64.
+    yandex: Preparing to unpack .../15-libtiff5_4.1.0+git191117-2ubuntu0.20.04.1_amd64.deb ...
+    yandex: Unpacking libtiff5:amd64 (4.1.0+git191117-2ubuntu0.20.04.1) ...
+    yandex: Selecting previously unselected package libxpm4:amd64.
+    yandex: Preparing to unpack .../16-libxpm4_1%3a3.5.12-1_amd64.deb ...
+    yandex: Unpacking libxpm4:amd64 (1:3.5.12-1) ...
+    yandex: Selecting previously unselected package libgd3:amd64.
+    yandex: Preparing to unpack .../17-libgd3_2.2.5-5.2ubuntu2.1_amd64.deb ...
+    yandex: Unpacking libgd3:amd64 (2.2.5-5.2ubuntu2.1) ...
+    yandex: Selecting previously unselected package nginx-common.
+    yandex: Preparing to unpack .../18-nginx-common_1.18.0-0ubuntu1.2_all.deb ...
+    yandex: Unpacking nginx-common (1.18.0-0ubuntu1.2) ...
+    yandex: Selecting previously unselected package libnginx-mod-http-image-filter.
+    yandex: Preparing to unpack .../19-libnginx-mod-http-image-filter_1.18.0-0ubuntu1.2_amd64.deb ...
+    yandex: Unpacking libnginx-mod-http-image-filter (1.18.0-0ubuntu1.2) ...
+    yandex: Selecting previously unselected package libxslt1.1:amd64.
+    yandex: Preparing to unpack .../20-libxslt1.1_1.1.34-4_amd64.deb ...
+    yandex: Unpacking libxslt1.1:amd64 (1.1.34-4) ...
+    yandex: Selecting previously unselected package libnginx-mod-http-xslt-filter.
+    yandex: Preparing to unpack .../21-libnginx-mod-http-xslt-filter_1.18.0-0ubuntu1.2_amd64.deb ...
+    yandex: Unpacking libnginx-mod-http-xslt-filter (1.18.0-0ubuntu1.2) ...
+    yandex: Selecting previously unselected package libnginx-mod-mail.
+    yandex: Preparing to unpack .../22-libnginx-mod-mail_1.18.0-0ubuntu1.2_amd64.deb ...
+    yandex: Unpacking libnginx-mod-mail (1.18.0-0ubuntu1.2) ...
+    yandex: Selecting previously unselected package libnginx-mod-stream.
+    yandex: Preparing to unpack .../23-libnginx-mod-stream_1.18.0-0ubuntu1.2_amd64.deb ...
+    yandex: Unpacking libnginx-mod-stream (1.18.0-0ubuntu1.2) ...
+    yandex: Selecting previously unselected package nginx-core.
+    yandex: Preparing to unpack .../24-nginx-core_1.18.0-0ubuntu1.2_amd64.deb ...
+    yandex: Unpacking nginx-core (1.18.0-0ubuntu1.2) ...
+    yandex: Selecting previously unselected package nginx.
+    yandex: Preparing to unpack .../25-nginx_1.18.0-0ubuntu1.2_all.deb ...
+    yandex: Unpacking nginx (1.18.0-0ubuntu1.2) ...
+    yandex: Selecting previously unselected package patch.
+    yandex: Preparing to unpack .../26-patch_2.7.6-6_amd64.deb ...
+    yandex: Unpacking patch (2.7.6-6) ...
+    yandex: Setting up perl-modules-5.30 (5.30.0-9ubuntu0.2) ...
+    yandex: Setting up libxpm4:amd64 (1:3.5.12-1) ...
+    yandex: Setting up nginx-common (1.18.0-0ubuntu1.2) ...
+    yandex: debconf: unable to initialize frontend: Dialog
+    yandex: debconf: (Dialog frontend will not work on a dumb terminal, an emacs shell buffer, or without a controlling terminal.)
+    yandex: debconf: falling back to frontend: Readline
+    yandex: Created symlink /etc/systemd/system/multi-user.target.wants/nginx.service → /lib/systemd/system/nginx.service.
+    yandex: Setting up libcurl3-gnutls:amd64 (7.68.0-1ubuntu2.7) ...
+    yandex: Setting up libjbig0:amd64 (2.1-3.1build1) ...
+    yandex: Setting up patch (2.7.6-6) ...
+    yandex: Setting up libwebp6:amd64 (0.6.1-2ubuntu0.20.04.1) ...
+    yandex: Setting up fonts-dejavu-core (2.37-1) ...
+    yandex: Setting up libgdbm-compat4:amd64 (1.18.1-5) ...
+    yandex: Setting up libjpeg-turbo8:amd64 (2.0.3-0ubuntu1.20.04.1) ...
+    yandex: Setting up libxslt1.1:amd64 (1.1.34-4) ...
+    yandex: Setting up libperl5.30:amd64 (5.30.0-9ubuntu0.2) ...
+    yandex: Setting up git-man (1:2.25.1-1ubuntu3.2) ...
+    yandex: Setting up libjpeg8:amd64 (8c-2ubuntu8) ...
+    yandex: Setting up libnginx-mod-mail (1.18.0-0ubuntu1.2) ...
+    yandex: Setting up fontconfig-config (2.13.1-2ubuntu3) ...
+    yandex: Setting up libnginx-mod-stream (1.18.0-0ubuntu1.2) ...
+    yandex: Setting up libnginx-mod-http-xslt-filter (1.18.0-0ubuntu1.2) ...
+    yandex: Setting up perl (5.30.0-9ubuntu0.2) ...
+    yandex: Setting up libtiff5:amd64 (4.1.0+git191117-2ubuntu0.20.04.1) ...
+    yandex: Setting up libfontconfig1:amd64 (2.13.1-2ubuntu3) ...
+    yandex: Setting up liberror-perl (0.17029-1) ...
+    yandex: Setting up libgd3:amd64 (2.2.5-5.2ubuntu2.1) ...
+    yandex: Setting up git (1:2.25.1-1ubuntu3.2) ...
+    yandex: Setting up libnginx-mod-http-image-filter (1.18.0-0ubuntu1.2) ...
+    yandex: Setting up nginx-core (1.18.0-0ubuntu1.2) ...
+    yandex: Setting up nginx (1.18.0-0ubuntu1.2) ...
+    yandex: Processing triggers for ufw (0.36-6) ...
+    yandex: Processing triggers for systemd (245.4-4ubuntu3.11) ...
+    yandex: Processing triggers for man-db (2.9.1-1) ...
+    yandex: Processing triggers for libc-bin (2.31-0ubuntu9.2) ...
+==> yandex: Synchronizing state of nginx.service with SysV service script with /lib/systemd/systemd-sysv-install.
+==> yandex: Executing: /lib/systemd/systemd-sysv-install enable nginx
+    yandex: <!DOCTYPE html>
+    yandex: <html>
+==> yandex:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+    yandex: <head>
+    yandex: <title>Welcome to nginx!</title>
+==> yandex:                                  Dload  Upload   Total   Spent    Left  Speed
+==> yandex: 100   612  100   612    0     0   597k      0 --:--:-- --:--:-- --:--:--  597k
+    yandex: <style>
+    yandex:     body {
+    yandex:         width: 35em;
+    yandex:         margin: 0 auto;
+    yandex:         font-family: Tahoma, Verdana, Arial, sans-serif;
+    yandex:     }
+    yandex: </style>
+    yandex: </head>
+    yandex: <body>
+    yandex: <h1>Welcome to nginx!</h1>
+    yandex: <p>If you see this page, the nginx web server is successfully installed and
+    yandex: working. Further configuration is required.</p>
+    yandex:
+    yandex: <p>For online documentation and support please refer to
+    yandex: <a href="http://nginx.org/">nginx.org</a>.<br/>
+    yandex: Commercial support is available at
+    yandex: <a href="http://nginx.com/">nginx.com</a>.</p>
+    yandex:
+    yandex: <p><em>Thank you for using nginx.</em></p>
+    yandex: </body>
+    yandex: </html>
+==> yandex: Stopping instance...
+==> yandex: Deleting instance...
+    yandex: Instance has been deleted!
+==> yandex: Creating image: ubuntu-2004-lts-nginx-isotime
+==> yandex: Waiting for image to complete...
+==> yandex: Success image create...
+==> yandex: Destroying subnet...
+    yandex: Subnet has been deleted!
+==> yandex: Destroying network...
+    yandex: Network has been deleted!
+==> yandex: Destroying boot disk...
+    yandex: Disk has been deleted!
+Build 'yandex' finished after 2 minutes 46 seconds.
+
+==> Wait completed after 2 minutes 46 seconds
+
+==> Builds finished. The artifacts of successful builds are:
+--> yandex: A disk image was created: ubuntu-2004-lts-nginx-isotime (id: fd8n2fpiaqqmt528i64u) with family name ubuntu-web-server
+viktor@ubuntu:~/otus-devops/packer$ 
