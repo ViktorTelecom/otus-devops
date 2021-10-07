@@ -1,0 +1,92 @@
+viktor@ubuntu:~/otus-devops/ansible$ tree
+.
+├── ansible.cfg
+├── environments
+│   └── prod
+│       ├── group_vars
+│       │   └── wp_app
+│       ├── inventory
+│       └── wp-app
+├── hosts
+├── playbooks
+│   └── install.yml
+├── roles
+│   └── wordpress
+│       ├── defaults
+│       │   └── main.yml
+│       ├── files
+│       │   └── root.crt
+│       ├── meta
+│       │   └── main.yml
+│       ├── tasks
+│       │   └── main.yml
+│       └── templates
+│           ├── wordpress.conf.j2
+│           └── wp-config.php.j2
+└── wordpress_log.log
+
+11 directories, 13 files
+
+viktor@ubuntu:~/otus-devops/ansible$ ansible-playbook /home/viktor/otus-devops/ansible/playbooks/install.yml
+[WARNING]: packaging Python module unavailable; unable to validate collection Ansible version requirements
+
+PLAY [wp_app] ***************************************************************************************************************************************
+
+TASK [Gathering Facts] ******************************************************************************************************************************
+ok: [app]
+ok: [app2]
+
+TASK [wordpress : Update apt-get repo and cache] ****************************************************************************************************
+ok: [app]
+ok: [app2]
+
+TASK [wordpress : install dependencies] *************************************************************************************************************
+ok: [app]
+ok: [app2]
+
+TASK [wordpress : Create the installation directory] ************************************************************************************************
+ok: [app]
+ok: [app2]
+
+TASK [wordpress : Install WordPress] ****************************************************************************************************************
+ok: [app]
+ok: [app2]
+
+TASK [wordpress : Copy file with owner and permissions] *********************************************************************************************
+ok: [app]
+ok: [app2]
+
+TASK [wordpress : Enable URL rewriting] *************************************************************************************************************
+ok: [app]
+ok: [app2]
+
+TASK [wordpress : Enable the site] ******************************************************************************************************************
+changed: [app]
+changed: [app2]
+
+TASK [wordpress : Disable the default “It Works” site] **********************************************************************************************
+changed: [app]
+changed: [app2]
+
+TASK [wordpress : Reload service apache2] ***********************************************************************************************************
+changed: [app]
+changed: [app2]
+
+TASK [wordpress : Install mysql cert] ***************************************************************************************************************
+ok: [app]
+ok: [app2]
+
+TASK [wordpress : Update cert index] ****************************************************************************************************************
+changed: [app]
+changed: [app2]
+
+TASK [wordpress : Configure WordPress] **************************************************************************************************************
+ok: [app]
+ok: [app2]
+
+PLAY RECAP ******************************************************************************************************************************************
+app                        : ok=13   changed=4    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+app2                       : ok=13   changed=4    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+viktor@ubuntu:~/otus-devops/ansible$ 
+viktor@ubuntu:~/otus-devops/ansible$ 
